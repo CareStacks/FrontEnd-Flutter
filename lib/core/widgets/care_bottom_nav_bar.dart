@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_colors.dart';
-import '../theme/app_text_styles.dart';
 
 enum CareNavDestination {
-  home(
-    label: 'Inicio',
-    icon: Icons.home_outlined,
-    selectedIcon: Icons.home,
-  ),
+  home(label: 'Inicio', icon: Icons.home_outlined, selectedIcon: Icons.home),
   agenda(
     label: 'Agenda',
-    icon: Icons.calendar_month_outlined,
-    selectedIcon: Icons.calendar_month,
+    icon: Icons.calendar_today_outlined,
+    selectedIcon: Icons.calendar_today,
   ),
   documents(
     label: 'Documentos',
@@ -21,7 +16,7 @@ enum CareNavDestination {
   ),
   diary(
     label: 'Diario',
-    icon: Icons.edit_note,
+    icon: Icons.edit_note_outlined,
     selectedIcon: Icons.edit_note,
   ),
   profile(
@@ -53,88 +48,36 @@ class CareBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
-      child: Container(
-        height: 78,
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        decoration: const BoxDecoration(
-          color: AppColors.surface,
-          border: Border(
-            top: BorderSide(color: AppColors.border),
-          ),
-          borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
-        ),
-        child: Row(
-          children: CareNavDestination.values.map((destination) {
-            final bool selected = currentDestination == destination;
-            return Expanded(
-              child: _CareBottomNavItem(
-                destination: destination,
-                selected: selected,
-                onTap: () => onDestinationSelected(destination),
-              ),
-            );
-          }).toList(),
-        ),
+    return NavigationBarTheme(
+      data: NavigationBarThemeData(
+        indicatorColor: AppColors.primaryLight,
+        labelTextStyle: WidgetStateProperty.resolveWith((states) {
+          final selected = states.contains(WidgetState.selected);
+          return TextStyle(
+            color: selected ? AppColors.primary : AppColors.textMuted,
+            fontSize: 12,
+            fontWeight: selected ? FontWeight.w700 : FontWeight.w600,
+          );
+        }),
       ),
-    );
-  }
-}
-
-class _CareBottomNavItem extends StatelessWidget {
-  const _CareBottomNavItem({
-    required this.destination,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final CareNavDestination destination;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final Color color = selected ? AppColors.surface : AppColors.neutral;
-
-    return Semantics(
-      selected: selected,
-      button: true,
-      label: destination.label,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(999),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          height: 56,
-          padding: const EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            color: selected ? AppColors.primary : Colors.transparent,
-            borderRadius: BorderRadius.circular(999),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                selected ? destination.selectedIcon : destination.icon,
-                color: color,
-                size: 22,
+      child: NavigationBar(
+        height: 72,
+        backgroundColor: AppColors.surface,
+        elevation: 4,
+        selectedIndex: currentDestination.index,
+        onDestinationSelected: (index) =>
+            onDestinationSelected(CareNavDestination.values[index]),
+        destinations: [
+          for (final destination in CareNavDestination.values)
+            NavigationDestination(
+              icon: Icon(destination.icon, color: AppColors.iconMuted),
+              selectedIcon: Icon(
+                destination.selectedIcon,
+                color: AppColors.primary,
               ),
-              const SizedBox(height: 2),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  destination.label,
-                  maxLines: 1,
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: color,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+              label: destination.label,
+            ),
+        ],
       ),
     );
   }

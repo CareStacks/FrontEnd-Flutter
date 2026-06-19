@@ -41,7 +41,7 @@ class AppTheme {
           foregroundColor: AppColors.surface,
           minimumSize: const Size.fromHeight(56),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(18),
           ),
           textStyle: AppTextStyles.titleMedium,
         ),
@@ -49,23 +49,21 @@ class AppTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: AppColors.surface,
-        hintStyle: AppTextStyles.bodyLarge.copyWith(
-          color: AppColors.textMuted,
-        ),
+        hintStyle: AppTextStyles.bodyLarge.copyWith(color: AppColors.textMuted),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 16,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(color: AppColors.border),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(color: AppColors.border),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           borderSide: const BorderSide(color: AppColors.primary),
         ),
       ),
