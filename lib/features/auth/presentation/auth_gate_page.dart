@@ -161,13 +161,6 @@ class _CaregiverLoginPageState extends State<_CaregiverLoginPage> {
                 _registerMode ? 'Crear cuenta cuidador' : 'Iniciar sesión',
                 style: AppTextStyles.headlineLarge,
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Vista Flutter para cuidadores, conectada al mismo backend de la app Android.',
-                style: AppTextStyles.bodyLarge.copyWith(
-                  color: AppColors.textSecondary,
-                ),
-              ),
               const SizedBox(height: 28),
               CareCard(
                 padding: const EdgeInsets.all(20),
