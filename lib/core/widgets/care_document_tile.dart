@@ -83,11 +83,7 @@ class CareDocumentTile extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 12),
-          const Icon(
-            Icons.chevron_right,
-            color: AppColors.iconMuted,
-            size: 26,
-          ),
+          const Icon(Icons.chevron_right, color: AppColors.iconMuted, size: 26),
         ],
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme/theme.dart';
-import 'features/caregiver/presentation/caregiver_main_page.dart';
+import 'features/auth/presentation/auth_gate_page.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,7 +15,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const CaregiverMainPage(),
+      home: const CaregiverAuthGate(),
     );
   }
 }

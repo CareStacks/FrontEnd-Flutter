@@ -65,10 +65,7 @@ class CareNoteCard extends StatelessWidget {
                 IconButton(
                   tooltip: 'Mas opciones',
                   onPressed: onMorePressed,
-                  icon: const Icon(
-                    Icons.more_vert,
-                    color: AppColors.iconMuted,
-                  ),
+                  icon: const Icon(Icons.more_vert, color: AppColors.iconMuted),
                 ),
             ],
           ),
@@ -81,11 +78,7 @@ class CareNoteCard extends StatelessWidget {
           ),
           if (badges.isNotEmpty) ...[
             const SizedBox(height: 18),
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: badges,
-            ),
+            Wrap(spacing: 8, runSpacing: 8, children: badges),
           ],
         ],
       ),

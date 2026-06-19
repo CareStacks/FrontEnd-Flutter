@@ -8,8 +8,8 @@ class CareCard extends StatelessWidget {
     required this.child,
     this.onTap,
     this.padding = const EdgeInsets.all(16),
-    this.borderRadius = 12,
-    this.elevation = 8,
+    this.borderRadius = 20,
+    this.elevation = 2,
     this.backgroundColor = AppColors.surface,
   });
 
@@ -29,9 +29,9 @@ class CareCard extends StatelessWidget {
         borderRadius: radius,
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryDark.withAlpha(20),
-            blurRadius: elevation,
-            offset: const Offset(0, 4),
+            color: AppColors.primaryDark.withAlpha(12),
+            blurRadius: elevation * 4,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
