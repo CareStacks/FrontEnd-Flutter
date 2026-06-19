@@ -47,11 +47,7 @@ class CareMetricSummaryCard extends StatelessWidget {
               for (int index = 0; index < metrics.length; index++) ...[
                 Expanded(child: _CareMetricItem(metric: metrics[index])),
                 if (index != metrics.length - 1)
-                  Container(
-                    width: 1,
-                    height: 56,
-                    color: AppColors.border,
-                  ),
+                  Container(width: 1, height: 56, color: AppColors.border),
               ],
             ],
           ),
