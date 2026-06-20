@@ -71,13 +71,25 @@ class CareConnectApiClient {
   }
 
   Future<List<LinkedPatient>> getCaregiverPatients(String token) async {
-    final json = await _requestList(
-      () => _httpClient.get(
-        _uri('/api/consents/me/caregiver/patients'),
-        headers: _headers(token: token),
-      ),
-    );
-    return mapJsonList(json, LinkedPatient.fromJson);
+    try {
+      final json = await _requestList(
+        () => _httpClient.get(
+          _uri('/api/consents/me/caregiver/patients'),
+          headers: _headers(token: token),
+        ),
+      );
+      return mapJsonList(json, LinkedPatient.fromJson);
+    } on ApiException catch (error) {
+      if (error.statusCode != 404) rethrow;
+
+      final json = await _requestMap(
+        () => _httpClient.get(
+          _uri('/api/consents/me/caregiver'),
+          headers: _headers(token: token),
+        ),
+      );
+      return [LinkedPatient.fromJson(json)];
+    }
   }
 
   Future<List<CaregiverInvitation>> getCaregiverInvitations(
@@ -87,10 +99,15 @@ class CareConnectApiClient {
     final path = pendingOnly
         ? '/api/invitations/me/caregiver/pending'
         : '/api/invitations/me/caregiver';
-    final json = await _requestList(
-      () => _httpClient.get(_uri(path), headers: _headers(token: token)),
-    );
-    return mapJsonList(json, CaregiverInvitation.fromJson);
+    try {
+      final json = await _requestList(
+        () => _httpClient.get(_uri(path), headers: _headers(token: token)),
+      );
+      return mapJsonList(json, CaregiverInvitation.fromJson);
+    } on ApiException catch (error) {
+      if (error.statusCode == 404) return const [];
+      rethrow;
+    }
   }
 
   Future<CaregiverInvitation> acceptInvitation(
